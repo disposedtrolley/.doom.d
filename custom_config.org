@@ -1,0 +1,156 @@
+* Emacs configuration
+** Projectile
+#+BEGIN_SRC emacs-lisp
+(setq projectile-project-search-path '("~/projects/" "~/Code/"))
+#+END_SRC
+** Styling
+*** Font
+#+BEGIN_SRC emacs-lisp
+(setq default-frame-alist '((font . "Iosevka-13")))
+#+END_SRC
+*** UI
+Show line numbers.
+#+BEGIN_SRC emacs-lisp
+(global-linum-mode t)
+#+END_SRC
+
+Remove window decorations (clean titlebars).
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+#+END_SRC
+
+Open Emacs in full-screen.
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+END_SRC
+
+** =org-mode=
+*** Agenda
+    The most important configuration is to set the root directory of our =org= files.
+    #+BEGIN_SRC emacs-lisp
+    (setq org-agenda-files (list "~/Dropbox/org"))
+    #+END_SRC
+
+*** =org-download=
+    =org-download= lets you save webpages to org files.
+    #+BEGIN_SRC emacs-lisp
+    (require 'org-download)
+    (add-hook 'dired-mode-hook 'org-download-enable)
+    #+END_SRC
+*** Source blocks
+    - We want syntax highlighting for source blocks:
+    #+BEGIN_SRC emacs-lisp
+    (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-confirm-babel-evaluate nil
+        org-edit-src-content-indentation 0)
+    #+END_SRC
+    - and inline evaluation for some languages:
+    #+BEGIN_SRC emacs-lisp
+    (require 'ob-go)
+    (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((R . t)
+      (ruby . t)
+      (python . t)
+      (js . t)
+      (latex . t)
+      (octave . t)
+      (processing . t)
+      (shell . t)
+      (go .t)))
+    #+END_SRC
+*** Inline images
+    #+BEGIN_SRC emacs-lisp
+    (setq org-startup-with-inline-images t)
+    #+END_SRC
+*** Org-specific styling
+    There are some configuration items we only want to load when =org-mode= is enabled.
+    #+BEGIN_SRC emacs-lisp
+    (require 'org-bullets)
+    (add-hook 'org-mode-hook
+    (lambda ()
+        ;; Enable pretty bullets
+        (org-bullets-mode 1)
+
+        ;; Set fonts
+        (set-face-attribute 'default nil :family "Iosevka" :height 140)
+        (set-face-attribute 'fixed-pitch nil :family "Iosevka" :height 140)
+        (set-face-attribute 'variable-pitch nil :family "Iosevka" :height 140)
+
+        (variable-pitch-mode 1)
+
+        ;; Centre content
+        (olivetti-mode)
+        (olivetti-set-width 120)
+
+        ;; No line numbers
+        (linum-mode 0)))
+
+        ;; Disable Prelude's default of removing whitespace at the end of the line
+        (setq prelude-clean-whitespace-on-save nil)
+
+        ;; In org-mode, we don't want to highlight characters exceeding column length
+        (setq whitespace-style nil)
+    #+END_SRC
+*** =org-capture=
+**** Hotkey
+     #+BEGIN_SRC emacs-lisp
+     (define-key global-map "\C-cc" 'org-capture)
+     #+END_SRC
+**** Default file
+     #+BEGIN_SRC emacs-lisp
+     (setq org-default-notes-file "~/Dropbox/org/dates/2019-aug.org")
+     #+END_SRC
+**** Templates
+     #+BEGIN_SRC emacs-lisp
+     (setq org-default-notes-file "~/Dropbox/org/dates/2019-sep.org")
+
+     (defun org-journal-find-location ()
+       (org-journal-new-entry t)
+       (goto-char (point-min)))
+
+     (setq org-capture-templates
+       '(
+          ("t" "Quick task" entry
+            (file "") 
+            "* TODO %^{Task}\n"
+            :immediate-finish t)
+          ("T" "Task" entry
+            (file "")
+            "* TODO %^{Task}\n")
+          ("n" "Quick note" entry
+            (file "")
+            "* :NOTE: %^{Note}\n"
+            :immediate-finish t)
+          ("N" "Note" entry
+            (file "")
+            "* :NOTE: %^{Note}\n")
+          ("J" "Journal" entry
+            (function org-journal-find-location)
+            "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
+     #+END_SRC
+*** =org-projectile=
+    #+BEGIN_SRC emacs-lisp
+    (require 'org-projectile)
+    (setq org-projectile-projects-file
+        "~/Dropbox/org/projects/inbox.org")
+    (push (org-projectile-project-todo-entry) org-capture-templates)
+    (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    #+END_SRC
+*** =org-journal=
+**** Journal directory
+     #+BEGIN_SRC emacs-lisp
+     (setq org-journal-dir "~/Dropbox/org/journal")
+     #+END_SRC
+** Custom functions
+*** Kill other buffers
+    #+BEGIN_SRC emacs-lisp
+    (defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer
+          (delq (current-buffer)
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+    #+END_SRC
