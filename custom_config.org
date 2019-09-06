@@ -9,11 +9,6 @@
 (setq default-frame-alist '((font . "Iosevka-13")))
 #+END_SRC
 *** UI
-Show line numbers.
-#+BEGIN_SRC emacs-lisp
-(global-linum-mode t)
-#+END_SRC
-
 Remove window decorations (clean titlebars).
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
