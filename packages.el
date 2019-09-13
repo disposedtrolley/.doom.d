@@ -8,3 +8,4 @@
 
 (package! org-projectile)
 (package! olivetti)
+(package! format-all)
