@@ -164,3 +164,9 @@ Open Emacs in full-screen.
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 #+END_SRC
+** Keybindings
+*** Comment/Uncomment region
+#+BEGIN_SRC emacs-lisp
+(map! (:map override
+        "C-c C-;" #'comment-or-uncomment-region))
+#+END_SRC
