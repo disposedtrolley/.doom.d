@@ -90,13 +90,9 @@ Open Emacs in full-screen.
         (setq whitespace-style nil)
     #+END_SRC
 *** =org-capture=
-**** Hotkey
-     #+BEGIN_SRC emacs-lisp
-     (define-key global-map "\C-cc" 'org-capture)
-     #+END_SRC
 **** Default file
      #+BEGIN_SRC emacs-lisp
-     (setq org-default-notes-file "~/Dropbox/org/dates/2019-aug.org")
+     (setq org-default-notes-file "~/Dropbox/org/dates/2019-sep.org")
      #+END_SRC
 **** Templates
      #+BEGIN_SRC emacs-lisp
