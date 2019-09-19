@@ -9,3 +9,4 @@
 (package! org-projectile)
 (package! olivetti)
 (package! format-all)
+(package! ob-go)
