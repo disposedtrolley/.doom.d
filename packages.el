@@ -10,3 +10,4 @@
 (package! olivetti)
 (package! format-all)
 (package! org-web-tools)
+(package! ob-go)

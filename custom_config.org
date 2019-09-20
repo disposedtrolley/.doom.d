@@ -21,6 +21,10 @@ Open Emacs in full-screen.
 #+END_SRC
 
 ** =org-mode=
+*** Root directory
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/Dropbox/org/")
+#+END_SRC
 *** Agenda
     The most important configuration is to set the root directory of our =org= files.
     #+BEGIN_SRC emacs-lisp
@@ -90,13 +94,9 @@ Open Emacs in full-screen.
         (setq whitespace-style nil)
     #+END_SRC
 *** =org-capture=
-**** Hotkey
-     #+BEGIN_SRC emacs-lisp
-     (define-key global-map "\C-cc" 'org-capture)
-     #+END_SRC
 **** Default file
      #+BEGIN_SRC emacs-lisp
-     (setq org-default-notes-file "~/Dropbox/org/dates/2019-aug.org")
+     (setq org-default-notes-file "~/Dropbox/org/dates/2019-sep.org")
      #+END_SRC
 **** Templates
      #+BEGIN_SRC emacs-lisp
@@ -163,4 +163,10 @@ Open Emacs in full-screen.
            "go generate && go build -v && go test -v && go vet"))
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+#+END_SRC
+** Keybindings
+*** Comment/Uncomment region
+#+BEGIN_SRC emacs-lisp
+(map! (:map override
+        "C-c C-;" #'comment-or-uncomment-region))
 #+END_SRC
