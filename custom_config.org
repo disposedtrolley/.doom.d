@@ -14,7 +14,7 @@
 ** UI
 *** Editing
     #+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "Source Code Pro" :size 13))
+(setq doom-font (font-spec :family "Fantasque Sans Mono" :size 13))
 (setq doom-theme 'doom-gruvbox)
 (setq display-line-numbers-type t)
     #+END_SRC
