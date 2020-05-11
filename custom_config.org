@@ -153,3 +153,8 @@
    (atomic-chrome-start-server)
    #+END_SRC
 
+** =auth-sources=
+   File to source tokens and secrets, mostly for =magit-forge=
+   #+BEGIN_SRC emacs-lisp
+(setq auth-sources '("~/.authinfo"))
+   #+END_SRC
