@@ -17,6 +17,11 @@
 (setq doom-font (font-spec :family "Fantasque Sans Mono" :size 13))
 (setq doom-theme 'doom-gruvbox)
 (setq display-line-numbers-type t)
+
+(setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+(doom-themes-treemacs-config)
+
+(doom-themes-org-config)
     #+END_SRC
 *** Window
     - Start Emacs in fullscreen.
