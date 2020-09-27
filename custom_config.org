@@ -22,6 +22,8 @@
 (doom-themes-treemacs-config)
 
 (doom-themes-org-config)
+
+(setq +pretty-code-enabled-modes nil)
     #+END_SRC
 *** Window
     - Start Emacs in fullscreen.
