@@ -174,7 +174,7 @@
 
 ** =org-roam=
    #+BEGIN_SRC emacs-lisp
-(setq org-roam-directory "~/org-roam")
+(setq org-roam-directory "~/Dropbox/org-roam")
 
 ;; Both hooks are needed because backlinks refused to work without
 ;; the org-mode-hook enabled too.
