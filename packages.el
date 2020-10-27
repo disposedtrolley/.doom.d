@@ -16,6 +16,8 @@
 (package! unfill)
 (package! dhall-mode)
 (package! git-link)
+(package! graphql-mode)
+(package! org-roam)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...

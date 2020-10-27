@@ -17,6 +17,13 @@
 (setq doom-font (font-spec :family "Fantasque Sans Mono" :size 13))
 (setq doom-theme 'doom-gruvbox)
 (setq display-line-numbers-type t)
+
+(setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+(doom-themes-treemacs-config)
+
+(doom-themes-org-config)
+
+(setq +pretty-code-enabled-modes nil)
     #+END_SRC
 *** Window
     - Start Emacs in fullscreen.
@@ -45,6 +52,11 @@
    (setq go-format-before-save t)
    (setq gofmt-command "goimports")
    #+END_SRC
+*** Rust
+    #+BEGIN_SRC emacs-lisp
+(setq lsp-rust-server 'rust-analyzer)
+(setq rustic-lsp-server 'rust-analyzer)
+    #+END_SRC
 ** org-mode
 *** Directories
    #+BEGIN_SRC emacs-lisp
@@ -158,4 +170,15 @@
    File to source tokens and secrets, mostly for =magit-forge=
    #+BEGIN_SRC emacs-lisp
 (setq auth-sources '("~/.authinfo"))
+   #+END_SRC
+
+** =org-roam=
+   #+BEGIN_SRC emacs-lisp
+(setq org-roam-directory "~/org-roam")
+
+;; Both hooks are needed because backlinks refused to work without
+;; the org-mode-hook enabled too.
+;; See https://github.com/org-roam/org-roam/issues/116#issuecomment-622397605
+(add-hook 'after-init-hook 'org-roam-mode)
+(add-hook 'org-mode-hook #'org-roam-mode)
    #+END_SRC
