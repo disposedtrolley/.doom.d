@@ -13,6 +13,9 @@
 (package! ob-go)
 (package! org-download)
 (package! atomic-chrome)
+(package! unfill)
+(package! dhall-mode)
+(package! git-link)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
