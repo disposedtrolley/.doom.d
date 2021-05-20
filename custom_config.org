@@ -86,13 +86,6 @@
    (go .t)
    (C .t)))
 #+END_SRC
-*** =org-journal=
-   #+BEGIN_SRC emacs-lisp
-   (setq org-journal-dir "~/Dropbox/org/journal/")
-   (defun org-journal-find-location ()
-         (org-journal-new-entry t)
-         (goto-char (point-min)))
-   #+END_SRC
 *** =org-capture=
    #+BEGIN_SRC emacs-lisp
    (setq org-capture-templates
@@ -110,10 +103,7 @@
         :immediate-finish t)
        ("N" "Note" entry
         (file "")
-        "* :NOTE: %^{Note}\n")
-       ("J" "Journal" entry
-        (function org-journal-find-location)
-        "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
+        "* :NOTE: %^{Note}\n")))
    #+END_SRC
 *** =org-download=
    #+BEGIN_SRC emacs-lisp
