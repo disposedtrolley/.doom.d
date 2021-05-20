@@ -172,3 +172,9 @@
 (setq auth-sources '("~/.authinfo"))
    #+END_SRC
 
+** =zetteldeft=
+   #+begin_src emacs-lisp
+(setq deft-directory "~/Dropbox/zettel")
+;; Enable keybinds.
+(zetteldeft-set-classic-keybindings)
+   #+end_src
