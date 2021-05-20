@@ -172,13 +172,3 @@
 (setq auth-sources '("~/.authinfo"))
    #+END_SRC
 
-** =org-roam=
-   #+BEGIN_SRC emacs-lisp
-(setq org-roam-directory "~/Dropbox/org-roam")
-
-;; Both hooks are needed because backlinks refused to work without
-;; the org-mode-hook enabled too.
-;; See https://github.com/org-roam/org-roam/issues/116#issuecomment-622397605
-(add-hook 'after-init-hook 'org-roam-mode)
-(add-hook 'org-mode-hook #'org-roam-mode)
-   #+END_SRC
