@@ -28,8 +28,6 @@
 *** Window
     - Start Emacs in fullscreen.
    #+BEGIN_SRC emacs-lisp
-"Start full screen"
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
    #+END_SRC
 ** Projectile 
