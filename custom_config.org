@@ -115,7 +115,8 @@
    #+END_SRC
 *** Inline images
    #+BEGIN_SRC emacs-lisp
-   (setq org-startup-with-inline-images t)
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width (/ (display-pixel-width) 3))
    #+END_SRC
 
 *** =org-projectile=
