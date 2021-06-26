@@ -26,8 +26,8 @@
 (setq +pretty-code-enabled-modes nil)
     #+END_SRC
 *** Window
-    - Start Emacs in fullscreen.
    #+BEGIN_SRC emacs-lisp
+;; Integrated titlebar on macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
    #+END_SRC
 ** Projectile 
