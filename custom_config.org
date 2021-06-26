@@ -14,8 +14,8 @@
 ** UI
 *** Editing
     #+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "Iosevka" :size 14))
-(setq doom-theme 'spacemacs-light)
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 15))
+(setq doom-theme 'doom-zenburn)
 (setq display-line-numbers-type t)
 
 (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
