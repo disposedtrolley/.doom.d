@@ -6,15 +6,12 @@
 ;; Alternatively, use M-x doom/reload.
 
 (package! org-projectile)
-(package! olivetti)
 (package! format-all)
-(package! org-web-tools)
 (package! ob-go)
 (package! org-download)
 (package! atomic-chrome)
 (package! unfill)
 (package! git-link)
-(package! graphql-mode)
 (package! spacemacs-theme)
 (package! zetteldeft)
 
