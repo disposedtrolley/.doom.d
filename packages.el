@@ -8,7 +8,6 @@
 (package! org-projectile)
 (package! format-all)
 (package! ob-go)
-(package! org-download)
 (package! atomic-chrome)
 (package! unfill)
 (package! git-link)
