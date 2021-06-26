@@ -58,10 +58,10 @@
 ** org-mode
 *** Directories
    #+BEGIN_SRC emacs-lisp
-   (setq org-directory "~/Dropbox/org/")
-   (setq org-agenda-files (directory-files-recursively "~/Dropbox/org/" "\.org$"))
+   (setq org-directory "~/Dropbox/zettel/")
+   (setq org-agenda-files (directory-files-recursively "~/Dropbox/zettel/" "\.org$"))
 
-   (setq org-default-notes-file "~/Dropbox/org/inbox/2020-may.org")
+   (setq org-default-notes-file "~/Dropbox/zettel/inbox.org")
    #+END_SRC
 *** Source Blocks
 #+BEGIN_SRC emacs-lisp
