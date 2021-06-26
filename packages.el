@@ -6,7 +6,6 @@
 ;; Alternatively, use M-x doom/reload.
 
 (package! org-projectile)
-(package! forge)
 (package! olivetti)
 (package! format-all)
 (package! org-web-tools)
