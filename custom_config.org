@@ -18,7 +18,7 @@
 (setq doom-theme 'modus-vivendi)
 (setq display-line-numbers-type t)
 
-(setq line-spacing 0.2)
+(setq-default line-spacing 2)
 
 (setq doom-themes-treemacs-enable-variable-pitch nil) ;; use doom-font for treemacs
 (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
