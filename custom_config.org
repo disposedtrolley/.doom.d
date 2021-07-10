@@ -58,6 +58,14 @@
 (setq lsp-rust-server 'rust-analyzer)
 (setq rustic-lsp-server 'rust-analyzer)
     #+END_SRC
+*** Lisp
+    #+begin_src emacs-lisp
+;; parinfer-rust-mode doesn't automatically install correctly on Apple M1.
+;; To address this issue, the library was compiled separately and copied
+;; to ~/.emacs.d/parinfer-rust/libparinfer_rust.so (notice the extension
+;; was renamed).
+(setq parinfer-rust-library "~/.emacs.d/parinfer-rust/libparinfer_rust.so")
+    #+end_src
 ** org-mode
 *** Directories
    #+BEGIN_SRC emacs-lisp
