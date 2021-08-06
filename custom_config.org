@@ -27,6 +27,9 @@
 (doom-themes-org-config)
 
 (setq +pretty-code-enabled-modes nil)
+
+(setq-default word-wrap t)
+(global-visual-line-mode t)
     #+END_SRC
 *** Window
    #+BEGIN_SRC emacs-lisp
