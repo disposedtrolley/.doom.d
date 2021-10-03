@@ -176,5 +176,5 @@
        tty               ; improve the terminal Emacs experience
 
        :config
-       ;;literate
+       literate
        (default +bindings +smartparens))
