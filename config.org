@@ -1,92 +1,108 @@
 #+TITLE: Emacs Configuration
 
-* Config
-** User
-   #+BEGIN_SRC emacs-lisp
+Welcome to my Emacs configuration, expressed in Org style! This assumes a
+[[https://github.com/hlissner/doom-emacs][doom-emacs]] base installation.
+
+* User
+Tell Emacs who the current user is. This is primarily used to add an author
+attribution to exported Org files (I think).
+#+begin_src emacs-lisp
 (setq user-full-name "James Liu"
       user-mail-address "james@jamesliu.io")
-   #+END_SRC
-** UI
-*** Editing
-    #+BEGIN_SRC emacs-lisp
+#+end_src
+* UI
+** Fonts
+#+begin_src emacs-lisp
+(setq-default line-spacing 3)
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 15))
-(setq doom-theme 'modus-vivendi)
-(setq display-line-numbers-type t)
-
-(setq-default line-spacing 2)
-
 (setq doom-themes-treemacs-enable-variable-pitch nil) ;; use doom-font for treemacs
-(setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-(doom-themes-treemacs-config)
-
-(doom-themes-org-config)
-
-(setq +pretty-code-enabled-modes nil)
-
+#+end_src
+** Themes
+#+begin_src emacs-lisp
+(setq doom-theme 'modus-vivendi)
+(setq doom-themes-treemacs-theme "doom-atom")
+#+end_src
+** Editing
+*** Line numbers
+Display line numbers as absolute values from the beginning of the file. Relative
+line numbers /may/ work better in conjunction with evil bindings, but I cbf
+getting used to them.
+#+begin_src emacs-lisp
+(setq display-line-numbers-type t)
+#+end_src
+*** Word wrap
+Soft wrapping comes in handy for smaller displays, and because most people don't
+hard-wrap their lines.
+#+begin_src emacs-lisp
 (setq-default word-wrap t)
-(global-visual-line-mode t)
-    #+END_SRC
-*** Window
-   #+BEGIN_SRC emacs-lisp
-;; Integrated titlebar on macOS
-;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-   #+END_SRC
+(global-visual-line-mode t) ;; navigate lines visually, not logically
+#+end_src
+*** Hard wrap
+#+begin_src emacs-lisp
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+#+end_src
+* Programming
 ** Projectile
-  #+BEGIN_SRC emacs-lisp
-  (setq projectile-project-search-path '("~/projects/"))
-  #+END_SRC
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/projects/"))
+#+end_src
 ** Source Control
 *** Magit
-   #+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
+;; Auth keys.
+(setq auth-sources '("~/.authinfo"))
+
 (with-eval-after-load 'magit
   (require 'forge)
   (require 'github-review)
 
   (setq github-review-fetch-top-level-and-review-comments t))
-   #+END_SRC
-
+#+end_src
 ** Languages
 *** Go
-   #+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
-   #+END_SRC
-*** Rust
-    #+BEGIN_SRC emacs-lisp
-(setq lsp-rust-server 'rust-analyzer)
-(setq rustic-lsp-server 'rust-analyzer)
-    #+END_SRC
+#+end_src
 *** Lisp
-    #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 ;; parinfer-rust-mode doesn't automatically install correctly on Apple M1.
 ;; To address this issue, the library was compiled separately and copied
 ;; to ~/.emacs.d/parinfer-rust/libparinfer_rust.so (notice the extension
 ;; was renamed).
 (setq parinfer-rust-library "~/.emacs.d/parinfer-rust/libparinfer_rust.so")
-    #+end_src
-** org-mode
-*** Directories
-   #+BEGIN_SRC emacs-lisp
-   (setq org-directory "~/Dropbox/zettel/")
-   (setq org-agenda-files (directory-files-recursively "~/Dropbox/zettel/" "\.org$"))
-
-   (setq org-default-notes-file "~/Dropbox/zettel/inbox.org")
-   #+END_SRC
-*** Source Blocks
-#+BEGIN_SRC emacs-lisp
+#+end_src
+*** Rust
+#+begin_src emacs-lisp
+(setq lsp-rust-server 'rust-analyzer)
+(setq rustic-lsp-server 'rust-analyzer)
+#+end_src
+* Org
+#+begin_src emacs-lisp
+(setq org-directory "~/Dropbox/zettel/")
+(setq org-agenda-files (directory-files-recursively "~/Dropbox/zettel/" "\.org$"))
+(setq org-default-notes-file "~/Dropbox/zettel/inbox.org")
+#+end_src
+** Source Blocks
+#+begin_src emacs-lisp
+;; Provides <s shortcut to insert source blocks.
 (require 'org-tempo)
 
-(setq org-src-tab-acts-natively t)
-
-(setq org-src-fontify-natively t
+(setq org-src-tab-acts-natively t
+      org-src-fontify-natively t
       org-src-tab-acts-natively t
       org-confirm-babel-evaluate nil
       org-edit-src-content-indentation 0)
+
+;; Go-specific config
 (require 'ob-go)
 
+;; Clojure-specific config
 (setq org-babel-clojure-backend 'cider)
 (require 'cider)
 
+;; Register other languages for Org Babel
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((ruby . t)
@@ -97,87 +113,35 @@
    (go .t)
    (clojure .t)
    (C .t)))
-#+END_SRC
-*** =org-capture=
-   #+BEGIN_SRC emacs-lisp
-   (setq org-capture-templates
-     '(
-        ("t" "Quick task" entry
-        (file "")
-        "* TODO %^{Task}\n"
-        :immediate-finish t)
-       ("T" "Task" entry
-        (file "")
-        "* TODO %^{Task}\n")
-       ("n" "Quick note" entry
-        (file "")
-        "* :NOTE: %^{Note}\n"
-        :immediate-finish t)
-       ("N" "Note" entry
-        (file "")
-        "* :NOTE: %^{Note}\n")))
-   #+END_SRC
-*** =org-download=
-   #+BEGIN_SRC emacs-lisp
-   (require 'org-download)
-   (add-hook 'dired-mode-hook 'org-download-enable)
-   #+END_SRC
-*** Inline images
-   #+BEGIN_SRC emacs-lisp
+#+end_src
+** Images
+#+begin_src emacs-lisp
+;; Drag-and-drop images to an Org buffer.
+(require 'org-download)
+(add-hook 'dired-mode-hook 'org-download-enable)
+
+;; Display images inline.
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width (/ (display-pixel-width) 3))
-   #+END_SRC
-
-*** =org-projectile=
-   #+BEGIN_SRC emacs-lisp
-   (require 'org-projectile)
-   (setq org-projectile-projects-file
-         "~/Dropbox/org/projects/inbox.org")
-   (push (org-projectile-project-todo-entry) org-capture-templates)
-   (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-   #+END_SRC
-** Text formatting
-*** Auto Fill Mode
-   #+BEGIN_SRC emacs-lisp
-(setq-default fill-column 80)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-   #+END_SRC
-** =nov.el=
-   #+BEGIN_SRC emacs-lisp
-   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-
-   (defun my-nov-font-setup ()
-     (face-remap-add-relative 'variable-pitch :family "Liberation Serif"
-                                              :height 1.4))
-   (add-hook 'nov-mode-hook 'my-nov-font-setup)
-
-   (setq nov-text-width 80)
-   (setq nov-text-width t)
-   (setq visual-fill-column-center-text t)
-   (add-hook 'nov-mode-hook 'visual-line-mode)
-   (add-hook 'nov-mode-hook 'visual-fill-column-mode)
-   #+END_SRC
-*** Refile
-    - Allow all heading levels to be =org-refile= targets
-    #+BEGIN_SRC emacs-lisp
-    (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-    #+END_SRC
-
-** =atomic-chrome=
-   #+BEGIN_SRC emacs-lisp
-   (require 'atomic-chrome)
-   (atomic-chrome-start-server)
-   #+END_SRC
-
-** =auth-sources=
-   File to source tokens and secrets, mostly for =magit-forge=
-   #+BEGIN_SRC emacs-lisp
-(setq auth-sources '("~/.authinfo"))
-   #+END_SRC
-
-** =zetteldeft=
-   #+begin_src emacs-lisp
-(setq deft-directory "~/Dropbox/zettel")
+#+end_src
+** Projectile integration
+#+begin_src emacs-lisp
+(require 'org-projectile)
+(setq org-projectile-projects-file
+      "~/Dropbox/org/projects/inbox.org")
+(push (org-projectile-project-todo-entry) org-capture-templates)
+(setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+#+end_src
+** Zetteldeft
+#+begin_src emacs-lisp
+(setq deft-directory org-directory)
 ;; Enable keybinds.
 (zetteldeft-set-classic-keybindings)
-   #+end_src
+#+end_src
+* Integrations
+** Atomic Chrome
+Edit text fields on websites using Emacs.
+#+begin_src emacs-lisp
+(require 'atomic-chrome)
+(atomic-chrome-start-server)
+#+end_src
