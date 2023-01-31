@@ -51,4 +51,5 @@
 
 (package! modus-themes)
 (package! almost-mono-themes)
-(package! good-scroll)
+(package! org-tree-slide)
+(package! ob-go)

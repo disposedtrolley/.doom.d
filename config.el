@@ -76,4 +76,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(good-scroll-mode 1)
+(require 'ob-go)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)
+   (go .t)
+   (C .t)))
