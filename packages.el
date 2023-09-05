@@ -53,3 +53,4 @@
 (package! almost-mono-themes)
 (package! org-tree-slide)
 (package! ob-go)
+(package! acme-theme)
