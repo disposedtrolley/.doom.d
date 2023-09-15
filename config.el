@@ -83,3 +83,7 @@
  '((shell . t)
    (go .t)
    (C .t)))
+
+(setq auth-sources '("~/.authinfo"))
+(with-eval-after-load 'magit
+  (require 'forge))
